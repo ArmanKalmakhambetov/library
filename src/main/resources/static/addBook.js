@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", function () {
     const addBookForm = document.getElementById("addBookForm");
 
@@ -11,16 +12,12 @@ document.addEventListener("DOMContentLoaded", function () {
         const description = document.getElementById("description").value;
         const image = document.getElementById("image").value;
 
-
-
         // Создаем объект с данными книги
         const bookData = {
             title: title,
             author: author,
             description: description,
             image: image,
-
-
         };
 
         // Отправляем данные на сервер
@@ -41,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Добавляем новую книгу в список (если необходимо)
                 // Например, можно вызвать функцию для обновления списка книг
-                getAllBooks();
+                // getAllBooks();
             })
             .catch((error) => {
                 // Обработка ошибок при отправке данных на сервер
@@ -50,4 +47,3 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 });
-

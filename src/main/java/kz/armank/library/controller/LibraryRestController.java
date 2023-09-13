@@ -45,16 +45,13 @@ public class LibraryRestController {
     // Добавить новую книгу
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Category category = new Category();
-        category.setName(book.getCategory().getName());
-        book.setCategory(category);
         return new ResponseEntity<>(bookService.addBook(book), HttpStatus.OK);
     }
 
     // Обновить существующую книгу
     @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
-        Book newUpdateBook = new Book();
+        Book newUpdateBook = bookService.getBookById(id);
         newUpdateBook.setTitle(updatedBook.getTitle());
         newUpdateBook.setAuthor(updatedBook.getAuthor());
         newUpdateBook.setDescription(updatedBook.getDescription());
