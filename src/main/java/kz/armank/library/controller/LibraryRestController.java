@@ -10,14 +10,10 @@ import kz.armank.library.service.abstracts.RatingService;
 import kz.armank.library.service.abstracts.ReviewService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
@@ -66,6 +62,20 @@ public class LibraryRestController {
         bookService.deleteBook(id);
         return new ResponseEntity<>("Книга с id = " + id + " успешно удалена", HttpStatus.OK );
     }
+
+
+
+//    @GetMapping("/by-category/{categoryId}")
+//    public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable Long categoryId) {
+//        Category category = categoryService.getCategoryById(categoryId);
+//
+//        if (category == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//
+//        List<Book> books = bookService.getBooksByCategory(category);
+//        return ResponseEntity.ok(books);
+//    }
 
     // Добавить новую категорию
     @PostMapping("/categories")

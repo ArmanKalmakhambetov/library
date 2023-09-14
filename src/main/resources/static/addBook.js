@@ -1,5 +1,7 @@
+// addBook.js
+import { getAllBooks } from './getAllBooks'; // Импортируем функцию
 
-document.addEventListener("DOMContentLoaded", function () {
+
     const addBookForm = document.getElementById("addBookForm");
 
     // Обработчик события отправки формы
@@ -36,9 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Очищаем форму после успешного добавления
                 addBookForm.reset();
 
-                // Добавляем новую книгу в список (если необходимо)
-                // Например, можно вызвать функцию для обновления списка книг
-                // getAllBooks();
+                // Вызываем функцию для обновления списка книг
+                getAllBooks();
             })
             .catch((error) => {
                 // Обработка ошибок при отправке данных на сервер
@@ -46,4 +47,3 @@ document.addEventListener("DOMContentLoaded", function () {
                 alert("Произошла ошибка при добавлении книги");
             });
     });
-});

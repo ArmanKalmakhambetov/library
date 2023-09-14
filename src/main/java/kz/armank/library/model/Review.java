@@ -1,6 +1,5 @@
 package kz.armank.library.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import jakarta.persistence.*;
 

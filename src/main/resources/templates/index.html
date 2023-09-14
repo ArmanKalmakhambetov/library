@@ -38,6 +38,7 @@
 <script>
   // Function to fetch and display all books
   function getAllBooks() {
+    console.log("getAllBooksStart")
     fetch('/api/books')
             .then(response => response.json())
             .then(data => {
