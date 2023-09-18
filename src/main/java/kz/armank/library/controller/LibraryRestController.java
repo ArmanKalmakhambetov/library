@@ -9,15 +9,18 @@ import kz.armank.library.service.abstracts.CategoryService;
 import kz.armank.library.service.abstracts.RatingService;
 import kz.armank.library.service.abstracts.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/books")
+@CrossOrigin(origins = "http://localhost:3000")
 public class LibraryRestController {
 
     private final BookService bookService;
@@ -73,8 +76,9 @@ public class LibraryRestController {
 //            return ResponseEntity.notFound().build();
 //        }
 //
-//        List<Book> books = bookService.getBooksByCategory(category);
-//        return ResponseEntity.ok(books);
+////        List<Book> books = bookService.getBooksByCategory(category);
+////        return ResponseEntity.ok();
+//        return ResponseEntity.ok(new ArrayList<>());
 //    }
 
     // Добавить новую категорию
