@@ -1,12 +1,12 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 
-function Layout() {
+export default function Layout() {
     return (
-        <div>
+        <div className="container">
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
                 <Link className="navbar-brand" to="/">
-                    Your Library
+                    Калмахамбетова Т.С.
                 </Link>
                 <button
                     className="navbar-toggler"
@@ -44,5 +44,3 @@ function Layout() {
         </div>
     );
 }
-
-export default Layout;

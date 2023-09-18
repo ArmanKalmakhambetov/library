@@ -61,9 +61,8 @@ public class LibraryRestController {
 
     // Удалить книгу по ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable Long id) {
+    public void deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
-        return new ResponseEntity<>("Книга с id = " + id + " успешно удалена", HttpStatus.OK );
     }
 
 
