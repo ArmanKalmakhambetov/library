@@ -1,11 +1,10 @@
-package kz.armank.library.service.abstracts;
-
+package kz.armank.library.dao.abstracts;
 
 import kz.armank.library.model.Book;
 
 import java.util.List;
 
-public interface BookService {
+public interface BookDao {
 
     Book createBook(Book book);
 
@@ -17,10 +16,7 @@ public interface BookService {
 
     void deleteBook(Long id);
 
-    void saveCategoryToUser(Long bookId, String categoryName);
+    void saveCategoryToUser(Long userId, String categoryName);
 
     void removeCategoryFromBook(Long bookId, String categoryName);
-
-
-
 }

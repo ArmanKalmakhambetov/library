@@ -1,12 +1,15 @@
+import logo from '../book_86345.svg'
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import '../App.css'
 
 export default function Layout() {
     return (
-        <div className="container">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">
-                    Калмахамбетова Т.С.
+        <div className="container-fluid">
+            <nav className="navbar navbar-expand-lg navbar-light border-bottom">
+                <Link className="navbar-brand mx-4" to="/">
+                    <img src={logo} className="App-logo me-3" style={{height: '50px'}} alt=""/>
+                    Личная библиотека
                 </Link>
                 <button
                     className="navbar-toggler"
@@ -23,7 +26,7 @@ export default function Layout() {
                     <ul className="navbar-nav">
                         <li className="nav-item">
                             <Link className="nav-link" to="/">
-                                Home
+                                Главная
                             </Link>
                         </li>
                         <li className="nav-item">
@@ -39,8 +42,12 @@ export default function Layout() {
                     </ul>
                 </div>
             </nav>
-            <hr />
             <Outlet />
+            <footer>
+                <div className="container-fluid d-flex justify-content-center">
+                    <h5>Конец страницы</h5>
+                </div>
+            </footer>
         </div>
     );
 }

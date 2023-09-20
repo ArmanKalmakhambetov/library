@@ -44,19 +44,18 @@ public class LibraryRestController {
     // Добавить новую книгу
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        return new ResponseEntity<>(bookService.addBook(book), HttpStatus.OK);
+//        book.setCategories(categoryService.findSetCategories(book.getCategories()));
+
+        return new ResponseEntity<>(bookService.createBook(book), HttpStatus.OK);
     }
 
     // Обновить существующую книгу
     @PutMapping("/{id}")
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
-        Book newUpdateBook = bookService.getBookById(id);
-        newUpdateBook.setTitle(updatedBook.getTitle());
-        newUpdateBook.setAuthor(updatedBook.getAuthor());
-        newUpdateBook.setDescription(updatedBook.getDescription());
-        newUpdateBook.setCategory(updatedBook.getCategory());
-        newUpdateBook.setImage(updatedBook.getImage());
-        return new ResponseEntity<>(bookService.updateBook(newUpdateBook), HttpStatus.OK);
+
+        updatedBook.setId(id);
+
+        return new ResponseEntity<>(bookService.updateBook(updatedBook), HttpStatus.OK);
     }
 
     // Удалить книгу по ID
@@ -83,7 +82,7 @@ public class LibraryRestController {
     // Добавить новую категорию
     @PostMapping("/categories")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
-        return new ResponseEntity<>(categoryService.addCategory(category), HttpStatus.OK );
+        return new ResponseEntity<>(categoryService.createCategory(category), HttpStatus.OK );
     }
 
     // Получить все категории
@@ -92,23 +91,6 @@ public class LibraryRestController {
         return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK );
     }
 
-    @GetMapping("/categories/{id}")
-    public ResponseEntity<Category> getCategoryById(@PathVariable Long id) {
-        return new ResponseEntity<>(categoryService.getCategoryById(id), HttpStatus.OK );
-    }
-
-    @PutMapping("/categories/{id}")
-    public ResponseEntity<Category> updateCategory(@PathVariable Long id) {
-        Category updatedCategory = categoryService.getCategoryById(id);
-        return new ResponseEntity<>(categoryService.updateCategory(updatedCategory), HttpStatus.OK );
-    }
-
-    // Удалить Category по ID
-    @DeleteMapping("/categories/{id}")
-    public ResponseEntity<String> deleteCategory(@PathVariable Long id) {
-        categoryService.deleteCategory(id);
-        return new ResponseEntity<>("Категория с id = " + id + " успешно удалена", HttpStatus.OK );
-    }
 
     // Добавить новый обзор
     @PostMapping("/reviews")

@@ -1,11 +1,11 @@
-package kz.armank.library.service.abstracts;
+package kz.armank.library.dao.abstracts;
 
 import kz.armank.library.model.Category;
 
 import java.util.List;
 import java.util.Set;
 
-public interface CategoryService {
+public interface CategoryDao {
 
     Category getCategoryByCategoryName (String name);
 

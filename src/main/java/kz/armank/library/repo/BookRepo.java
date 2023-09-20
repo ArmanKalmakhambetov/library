@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface BookRepo extends JpaRepository<Book, Long> {
 
-    @Query("SELECT b FROM Book as b WHERE b.category = :category")
+    @Query("SELECT b FROM Book b JOIN b.categories c WHERE c = :category")
     List<Book> getBooksByCategory(@Param("category") Category category);
+
 }

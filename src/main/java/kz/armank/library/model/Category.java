@@ -5,13 +5,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "category")
@@ -22,8 +24,44 @@ public class Category {
 
     private String name;
 
-    @OneToMany(mappedBy = "category")
-    @JsonIgnore
-    private List<Book> books;
 
+    @ManyToMany(mappedBy = "categories")
+    @JsonIgnore
+    private List<Book> books = new ArrayList<>();
+
+    public Category(String name) {
+        this.name = name;
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+        book.addCategory(this);
+    }
+
+    public void removeBook(Book book) {
+        books.remove(book);
+        book.removeCategory(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Category category = (Category) o;
+        return Objects.equals(id, category.id) && Objects.equals(name, category.name) && Objects.equals(books, category.books);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, books);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", books=" + books +
+                '}';
+    }
 }
