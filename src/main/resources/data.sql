@@ -1,3 +1,17 @@
+-- Создание таблицы 'book'
+CREATE TABLE IF NOT EXISTS book (
+                                    id INT AUTO_INCREMENT PRIMARY KEY,
+                                    title VARCHAR(255) NOT NULL,
+                                    author VARCHAR(255)
+);
+
+-- Создание таблицы 'category'
+CREATE TABLE IF NOT EXISTS category (
+                                        id INT AUTO_INCREMENT PRIMARY KEY,
+                                        name VARCHAR(255) NOT NULL
+);
+
+-- Создание таблицы 'category_of_books' с внешними ключами
 CREATE TABLE IF NOT EXISTS category_of_books (
                                                  id INT AUTO_INCREMENT PRIMARY KEY,
                                                  book_id INT,
@@ -5,6 +19,7 @@ CREATE TABLE IF NOT EXISTS category_of_books (
                                                  FOREIGN KEY (book_id) REFERENCES book(id),
                                                  FOREIGN KEY (category_id) REFERENCES category(id)
 );
+
 -- Вставляем тестовые категории
 INSERT INTO category (name) VALUES
                                 ('Фантастика'),
