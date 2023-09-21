@@ -3,7 +3,7 @@ package kz.armank.library.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +24,6 @@ public class Category {
 
     private String name;
 
-
     @ManyToMany(mappedBy = "categories")
     @JsonIgnore
     private List<Book> books = new ArrayList<>();
@@ -35,12 +34,10 @@ public class Category {
 
     public void addBook(Book book) {
         books.add(book);
-        book.addCategory(this);
     }
 
     public void removeBook(Book book) {
         books.remove(book);
-        book.removeCategory(this);
     }
 
     @Override

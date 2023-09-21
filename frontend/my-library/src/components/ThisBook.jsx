@@ -10,6 +10,9 @@ export default function BookDetails() {
     const [bookTitle, setBookTitle] = useState('');
     const [bookAuthor, setBookAuthor] = useState('');
     const [bookYear, setBookYear] = useState('');
+    const [bookPages, setBookPages] = useState('');
+    const [bookReview, setBookReview] = useState('');
+    const [bookRating, setBookRating] = useState('');
     const [bookDescription, setBookDescription] = useState('');
     const [bookImage, setBookImage] = useState('');
     const [bookCategories, setBookCategories] = useState([]);
@@ -74,6 +77,9 @@ export default function BookDetails() {
             setBookTitle(book.title);
             setBookAuthor(book.author);
             setBookYear(book.year);
+            setBookPages(book.pageVolume);
+            setBookReview(book.review);
+            setBookRating(book.rating);
             setBookDescription(book.description);
             setBookImage(book.image);
             setBookCategories(book.categories.map(category => category.name).join(', '));  // Если categories является массивом
@@ -93,6 +99,9 @@ export default function BookDetails() {
                     title: bookTitle,
                     author: bookAuthor,
                     year: bookYear,
+                    pageVolume: bookPages,
+                    review: bookReview,
+                    rating: bookRating,
                     description: bookDescription,
                     image: bookImage,
                     categories: bookCategories.split(', ').map(name => ({ name }))
@@ -137,13 +146,21 @@ export default function BookDetails() {
                                                     <option key={index} value={category.name}>{category.name}</option>
                                                 ))}
                                             </select>
-
                                             <label className="my-3" htmlFor="year">Год</label>
                                             <input value={bookYear} type="number" className="input form-control"
                                                    onChange={(e) => setBookYear(e.target.value)} />
+                                            <label className="my-3" htmlFor="pageVolume">Количество страниц</label>
+                                            <input value={bookPages} type="number" className="input form-control"
+                                                   onChange={(e) => setBookPages(e.target.value)} />
                                             <label className="my-3" htmlFor="description">Описание</label>
                                             <input value={bookDescription} type="text" className="input form-control"
                                                    onChange={(e) => setBookDescription(e.target.value)} />
+                                            <label className="my-3" htmlFor="review">Обзор</label>
+                                            <input id="review" value={bookReview} type="text" className="input form-control"
+                                                   onChange={(e) => setBookReview(e.target.value)} />
+                                            <label className="my-3" htmlFor="rating">Оценка</label>
+                                            <input pattern="[1-10]" value={bookRating} type="number" className="input form-control"
+                                                   onChange={(e) => setBookRating(e.target.value)} />
                                             <label className="my-3" htmlFor="image">Ссылка на изображение</label>
                                             <input value={bookImage} type="text" className="input form-control"
                                                    onChange={(e) => setBookImage(e.target.value)} />
@@ -157,7 +174,7 @@ export default function BookDetails() {
                                 </Modal>
                             </div>
                         </div>
-                        <div className="col-sm-8" style={{width: "800px"}}>
+                        <div className="col-sm-8">
                             <h3>{book.title}</h3>
                             <h5>Автор: {book.author}</h5>
                             <h5>Жанр: {book.categories.map((category, index) => (
@@ -166,9 +183,13 @@ export default function BookDetails() {
                             </h5>
 
                             <h5>Год: <span>{book.year}</span></h5>
-                            <h5>Описание книги</h5>
+                            <h5>Количество страниц: <span>{book.pageVolume}</span></h5>
+                            <h5 className="mt-5">Описание</h5>
                             <p style={{height: "500", width: "300"}}>{book.description}</p>
-
+                            <h5>Обзор</h5>
+                            <p style={{height: "500", width: "300"}}>{book.review}</p>
+                            <h5>Оценка</h5>
+                            <p style={{height: "500", width: "300"}}>{book.rating}/10</p>
                         </div>
                     </div>
                 </>

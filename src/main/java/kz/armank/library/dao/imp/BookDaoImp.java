@@ -1,8 +1,8 @@
 package kz.armank.library.dao.imp;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
-import jakarta.persistence.PersistenceContext;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.PersistenceContext;
 import kz.armank.library.dao.abstracts.BookDao;
 import kz.armank.library.model.Book;
 import kz.armank.library.model.Category;

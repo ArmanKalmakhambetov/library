@@ -22,5 +22,4 @@ public interface BookService {
     void removeCategoryFromBook(Long bookId, String categoryName);
 
 
-
 }

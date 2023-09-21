@@ -1,10 +1,5 @@
 package kz.armank.library.init;
 
-import jakarta.annotation.PostConstruct;
-import kz.armank.library.dao.abstracts.BookDao;
-import kz.armank.library.dao.abstracts.CategoryDao;
-import kz.armank.library.model.Book;
-import kz.armank.library.model.Category;
 import kz.armank.library.service.abstracts.BookService;
 import kz.armank.library.service.abstracts.CategoryService;
 import lombok.RequiredArgsConstructor;

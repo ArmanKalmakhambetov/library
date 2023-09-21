@@ -32,6 +32,9 @@ export default function AddBookForm() {
         image: "",
         title: "",
         year: 0,
+        pageVolume: 0,
+        review: "",
+        rating: 0,
     });
 
 
@@ -71,6 +74,9 @@ export default function AddBookForm() {
                     image: "",
                     title: "",
                     year: 0,
+                    pageVolume: 0,
+                    review: "",
+                    rating: 0,
                 })
                 navigate("/allBooks");
 
@@ -84,72 +90,109 @@ export default function AddBookForm() {
 
     return (
         <div className="container">
-            <h2>Добавить новую книгу</h2>
+            <h2 className="ms-3">Добавить новую книгу</h2>
             <div className="container-fluid d-flex justify-content-center">
-                <form style={{width: '400px' }} onSubmit={handleSubmit} encType="multipart/form-data">
-                    <div className="form-group">
-                        <label className="my-3" htmlFor="title">Заголовок книги</label>
-                        <input className="form-control"
-                               type="text"
-                               id="title"
-                               name="title"
-                               value={bookData.title}
-                               onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label className="my-3" htmlFor="author">Автор</label>
-                        <input className="form-control"
-                               type="text"
-                               id="author"
-                               name="author"
-                               value={bookData.author}
-                               onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label className="my-3" htmlFor="category">Жанр</label>
-                        <select
-                            value={bookData.categories.name} // Set the selected category's name
-                            onChange={handleChange}
-                            className="form-control"
-                            name="categories" // Set the name to "categories" for the handleChange function
-                        >
-                            {availableCategories.map((category, index) => (
-                                <option key={index} value={category.name}>
-                                    {category.name}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
-                    <div>
-                        <label className="my-3" htmlFor="year">Год</label>
-                        <input className="form-control"
-                               type="number"
-                               id="year"
-                               name="year"
-                               value={bookData.year}
-                               onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label className="my-3" htmlFor="description">Описание</label>
-                        <textarea className="form-control"
-                                  id="description"
-                                  name="description"
-                                  value={bookData.description}
-                                  onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label className="my-3" htmlFor="image">Ссылка на изображение</label>
-                        <input className="form-control"
-                               type="text"
-                               id="image"
-                               name="image"
-                               value={bookData.image}
-                               onChange={handleChange}
-                        />
+                <form style={{width: '1800px' }} onSubmit={handleSubmit} encType="multipart/form-data">
+                    <div className="row">
+                        <div className="col-sm-4">
+                            <div className="form-group">
+                                <label className="my-3" htmlFor="title">Заголовок книги</label>
+                                <input className="form-control"
+                                       type="text"
+                                       id="title"
+                                       name="title"
+                                       value={bookData.title}
+                                       onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="my-3" htmlFor="author">Автор</label>
+                                <input className="form-control"
+                                       type="text"
+                                       id="author"
+                                       name="author"
+                                       value={bookData.author}
+                                       onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="my-3" htmlFor="category">Жанр</label>
+                                <select
+                                    value={bookData.categories.name} // Set the selected category's name
+                                    onChange={handleChange}
+                                    className="form-control"
+                                    name="categories" // Set the name to "categories" for the handleChange function
+                                >
+                                    {availableCategories.map((category, index) => (
+                                        <option key={index} value={category.name}>
+                                            {category.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div>
+                                <label className="my-3" htmlFor="year">Год</label>
+                                <input className="form-control"
+                                       type="number"
+                                       id="year"
+                                       name="year"
+                                       value={bookData.year}
+                                       onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="my-3" htmlFor="pageVolume">Страниц</label>
+                                <input className="form-control"
+                                       type="number"
+                                       id="pageVolume"
+                                       name="pageVolume"
+                                       value={bookData.pageVolume}
+                                       onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="my-3" htmlFor="rating">Оценка</label>
+                                <input className="form-control"
+                                       type="number"
+                                       id="rating"
+                                       name="rating"
+                                       value={bookData.rating}
+                                       onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="my-3" htmlFor="image">Ссылка на изображение</label>
+                                <input className="form-control"
+                                       type="text"
+                                       id="image"
+                                       name="image"
+                                       value={bookData.image}
+                                       onChange={handleChange}
+                                />
+                            </div>
+                        </div>
+                        <div className="col-sm-8">
+                            <div>
+                                <label className="my-3" htmlFor="description">Описание</label>
+                                <textarea className="form-control"
+                                          rows="9"
+                                          id="description"
+                                          name="description"
+                                          value={bookData.description}
+                                          onChange={handleChange}
+                                />
+                            </div>
+                            <div>
+                                <label className="my-3" htmlFor="review">Обзор</label>
+                                <textarea className="form-control"
+                                          rows="13"
+                                          id="review"
+                                          name="review"
+                                          value={bookData.review}
+                                          onChange={handleChange}
+                                />
+                            </div>
+                        </div>
                     </div>
                     <button className="btn btn-primary my-3" type="submit">Добавить книгу</button>
                 </form>

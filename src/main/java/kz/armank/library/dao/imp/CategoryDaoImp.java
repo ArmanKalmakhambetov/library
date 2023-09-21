@@ -1,7 +1,7 @@
 package kz.armank.library.dao.imp;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import kz.armank.library.dao.abstracts.CategoryDao;
 import kz.armank.library.model.Category;
 import org.hibernate.Hibernate;

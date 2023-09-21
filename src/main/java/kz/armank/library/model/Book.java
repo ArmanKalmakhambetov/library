@@ -2,13 +2,14 @@ package kz.armank.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import jakarta.persistence.*;
+import org.springframework.validation.annotation.Validated;
+
+import javax.persistence.*;
+import javax.validation.constraints.*;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Getter
@@ -25,6 +26,8 @@ public class Book {
     private String author;
     private int year;
 
+    private int pageVolume;
+
     @Column(length = 800)
     private String description;
 
@@ -37,13 +40,13 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private List<Category> categories = new ArrayList<>();
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Review> reviews;
+    @Column(length = 800)
+    private String review;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private List<Rating> ratings;
+    @Column
+    @Min(value = 1)
+    @Max(value = 10)
+    private Integer rating;
 
     @Column(name = "image", length = 800)
     private String image;
@@ -63,27 +66,28 @@ public class Book {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return year == book.year && Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(description, book.description) && Objects.equals(categories, book.categories) && Objects.equals(reviews, book.reviews) && Objects.equals(ratings, book.ratings) && Objects.equals(image, book.image);
+        return year == book.year && pageVolume == book.pageVolume && Objects.equals(id, book.id) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(description, book.description) && Objects.equals(categories, book.categories) && Objects.equals(review, book.review) && Objects.equals(rating, book.rating) && Objects.equals(image, book.image);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, year, description, categories, reviews, ratings, image);
+        return Objects.hash(id, title, author, year, pageVolume, description, categories, review, rating, image);
     }
 
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", year=" + year +
-                ", description='" + description + '\'' +
-                ", categories=" + categories +
-                ", reviews=" + reviews +
-                ", ratings=" + ratings +
-                ", image='" + image + '\'' +
-                '}';
+               "id=" + id +
+               ", title='" + title + '\'' +
+               ", author='" + author + '\'' +
+               ", year=" + year +
+               ", pageVolume=" + pageVolume +
+               ", description='" + description + '\'' +
+               ", categories=" + categories +
+               ", review='" + review + '\'' +
+               ", rating=" + rating +
+               ", image='" + image + '\'' +
+               '}';
     }
 }
 

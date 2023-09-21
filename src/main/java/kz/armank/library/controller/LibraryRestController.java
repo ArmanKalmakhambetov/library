@@ -1,19 +1,22 @@
 package kz.armank.library.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import kz.armank.library.dto.BookDto;
+import kz.armank.library.dto.CategoryDto;
 import kz.armank.library.model.Book;
 import kz.armank.library.model.Category;
-import kz.armank.library.model.Rating;
-import kz.armank.library.model.Review;
+import kz.armank.library.service.abstracts.BookDtoService;
 import kz.armank.library.service.abstracts.BookService;
+import kz.armank.library.service.abstracts.CategoryDtoService;
 import kz.armank.library.service.abstracts.CategoryService;
-import kz.armank.library.service.abstracts.RatingService;
-import kz.armank.library.service.abstracts.ReviewService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,29 +24,38 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/books")
 @CrossOrigin(origins = "http://localhost:3000")
+@Api(value = "Книги", description = "Операции с книгами")
 public class LibraryRestController {
 
     private final BookService bookService;
+    private final BookDtoService bookDtoService;
     private final CategoryService categoryService;
-    private final ReviewService reviewService;
-    private final RatingService ratingService;
+    private final CategoryDtoService categoryDtoService;
 
 
     // Показать все книги
     @GetMapping
+    @ApiOperation(value = "Получить список всех книг", response = List.class)
     public ResponseEntity<List<Book>> getAllBooks() {
         return new ResponseEntity<>(bookService.getAllBooks(), HttpStatus.OK);
     }
 
+    @GetMapping("/book_dto")
+    @ApiOperation(value = "Получить Dto книг", response = BookDto.class)
+    public ResponseEntity<BookDto> getBookDtoById() {
+        return new ResponseEntity<>(bookDtoService.getById().get(), HttpStatus.OK);
+    }
+
     // Показать книгу по ID
     @GetMapping("/{id}")
+    @ApiOperation(value = "Получить книгу по id", response = Book.class)
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
         return new ResponseEntity<>(bookService.getBookById(id), HttpStatus.OK);
     }
 
     // Добавить новую книгу
     @PostMapping
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
+    public ResponseEntity<Book> addBook(@Valid @RequestBody Book book) {
         List<Category> actualCategories = new ArrayList<>();
 
         for (Category category : book.getCategories()) {
@@ -72,7 +84,7 @@ public class LibraryRestController {
 
     // Обновить существующую книгу
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
+    public ResponseEntity<Book> updateBook(@Valid @PathVariable Long id, @RequestBody Book updatedBook) {
 
         updatedBook.setId(id);
 
@@ -107,21 +119,6 @@ public class LibraryRestController {
         bookService.deleteBook(id);
     }
 
-
-
-//    @GetMapping("/by-category/{categoryId}")
-//    public ResponseEntity<List<Book>> getBooksByCategory(@PathVariable Long categoryId) {
-//        Category category = categoryService.getCategoryById(categoryId);
-//
-//        if (category == null) {
-//            return ResponseEntity.notFound().build();
-//        }
-//
-////        List<Book> books = bookService.getBooksByCategory(category);
-////        return ResponseEntity.ok();
-//        return ResponseEntity.ok(new ArrayList<>());
-//    }
-
     // Добавить новую категорию
     @PostMapping("/categories")
     public ResponseEntity<Category> addCategory(@RequestBody Category category) {
@@ -134,55 +131,11 @@ public class LibraryRestController {
         return new ResponseEntity<>(categoryService.getAllCategories(), HttpStatus.OK );
     }
 
-
-    // Добавить новый обзор
-    @PostMapping("/reviews")
-    public ResponseEntity<Review> addReview(@RequestBody Review review) {
-        return new ResponseEntity<>(reviewService.addReview(review), HttpStatus.OK);
+    @GetMapping("/categories/dto")
+    public ResponseEntity<List<CategoryDto>> getCategoryDto() {
+        return new ResponseEntity<>(categoryDtoService.getCategoryDto().get(), HttpStatus.OK );
     }
 
-    // Получить все обзоры
-    @GetMapping("/reviews")
-    public ResponseEntity<List<Review>> getAllReviews() {
-        return new ResponseEntity<>(reviewService.getAllReviews(), HttpStatus.OK);
-    }
 
-    @PutMapping("/reviews/{id}")
-    public ResponseEntity<Review> updateReview(@PathVariable Long id) {
-        Review updatedReview = reviewService.getReviewById(id);
-        return new ResponseEntity<>(reviewService.updateReview(updatedReview), HttpStatus.OK );
-    }
-
-    // Удалить Review по ID
-    @DeleteMapping("/reviews/{id}")
-    public ResponseEntity<String> deleteReview(@PathVariable Long id) {
-        reviewService.deleteReview(id);
-        return new ResponseEntity<>("Обзор с id = " + id + " успешно удален", HttpStatus.OK );
-    }
-
-    // Добавить новую оценку
-    @PostMapping("/ratings")
-    public ResponseEntity<Rating> addRating(@RequestBody Rating rating) {
-        return new ResponseEntity<>(ratingService.addRating(rating), HttpStatus.OK);
-    }
-
-    // Получить все оценки
-    @GetMapping("/ratings")
-    public ResponseEntity<List<Rating>> getAllRatings() {
-        return new ResponseEntity<>(ratingService.getAllRatings(), HttpStatus.OK);
-    }
-
-    @PutMapping("/ratings/{id}")
-    public ResponseEntity<Rating> updateRating(@PathVariable Long id) {
-        Rating updatedRating = ratingService.getRatingById(id);
-        return new ResponseEntity<>(ratingService.updateRating(updatedRating), HttpStatus.OK );
-    }
-
-    // Удалить Review по ID
-    @DeleteMapping("/ratings/{id}")
-    public ResponseEntity<String> deleteRating(@PathVariable Long id) {
-        ratingService.deleteRating(id);
-        return new ResponseEntity<>("Оценка с id = " + id + " успешно удалена", HttpStatus.OK );
-    }
 }
 

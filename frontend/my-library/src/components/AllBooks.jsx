@@ -32,7 +32,7 @@ export default function AllBooks() {
 
     return (
         <div className="container">
-            <h1 className="mx-4">Все книги</h1>
+            <h2 className="mx-4">Все книги</h2>
             <ul>
                 {books.map((book) => (
                     <div className="card mb-3" key={book.id} onClick={() => goToBookDetails(book.id)}>
