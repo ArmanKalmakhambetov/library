@@ -17,15 +17,7 @@ public class CategoryDtoDaoImp implements CategoryDtoDao {
 
     @Override
     public Optional<List<CategoryDto>> getCategoryDto() {
-//        return Optional.of(entityManager.createQuery(
-//                """
-//                        SELECT new kz.armank.library.dto.CategoryDto(c.name, count (b))
-//                        FROM Book b
-//                        JOIN b.categories c
-//                        GROUP BY c.name
-//                        """,
-//                CategoryDto.class)
-//                .getResultList());
+
         return Optional.empty();
     }
 }
