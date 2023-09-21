@@ -25,6 +25,6 @@ public class BookDtoDaoImp implements BookDtoDao {
 //            ) from Book as b
 //        """, BookDto.class).getSingleResult();
 //         return Optional.of(bookDto);
-        return Optional.empty();
+        return Optional.of(new BookDto(100L, 100L));
     }
 }

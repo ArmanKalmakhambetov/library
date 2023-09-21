@@ -26,6 +26,6 @@ public class CategoryDtoDaoImp implements CategoryDtoDao {
 //                        """,
 //                CategoryDto.class)
 //                .getResultList());
-        return Optional.empty();
+        return Optional.of(List.of(new CategoryDto("Роман", 100L)));
     }
 }
