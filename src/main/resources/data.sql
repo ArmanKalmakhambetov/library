@@ -1,25 +1,3 @@
-CREATE TABLE category (
-                          id INT AUTO_INCREMENT PRIMARY KEY,
-                          name VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE books (
-                          id INT AUTO_INCREMENT PRIMARY KEY,
-                          title VARCHAR(255),
-                          author VARCHAR(255),
-                          year BIGINT,
-                          page_volume BIGINT,
-                          rating BIGINT,
-                          review VARCHAR(800),
-                          description VARCHAR(800),
-                          image VARCHAR(800)
-);
-CREATE TABLE category_of_books (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
-                        book_id INT,
-                        category_id INT
-);
-
 
 -- Вставляем тестовые категории
 INSERT INTO category (name) VALUES
