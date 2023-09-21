@@ -15,7 +15,6 @@ public class CategoryDtoDaoImp implements CategoryDtoDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-
     @Override
     public Optional<List<CategoryDto>> getCategoryDto() {
 //        return Optional.of(entityManager.createQuery(
