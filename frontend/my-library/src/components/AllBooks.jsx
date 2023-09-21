@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Input } from 'reactstrap';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 export default function AllBooks() {
     const [books, setBooks] = useState([]);
@@ -20,10 +19,6 @@ export default function AllBooks() {
             });
     }, []);
 
-    const editBook = (e) => {
-        e.preventDefault();
-        console.log("console:", e.target.value);
-    };
 
     useEffect(() => {
         fetchBooks();

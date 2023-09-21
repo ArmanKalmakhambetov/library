@@ -1,22 +1,51 @@
-import React, { useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useNavigate} from "react-router-dom";
 
 export default function AddBookForm() {
+    const [availableCategories, setAvailableCategories] = useState([]);
+
+    const fetchCategories = useCallback(() => {
+        fetch('http://localhost:5050/api/books/categories', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setAvailableCategories(data);
+            })
+            .catch((error) => {
+                console.error('There was a problem fetching categories:', error);
+            });
+    }, []);
+
+    useEffect(() => {
+        fetchCategories();
+    }, [fetchCategories]);
+
     const [bookData, setBookData] = useState({
         author: "",
-        category: null,
+        categories: [], // Change to an array
         description: "",
         image: "",
         title: "",
         year: 0,
     });
 
+
     const navigate = useNavigate();
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setBookData({ ...bookData, [name]: value });
+
+        // For the 'categories' field, use an array with a single string value
+        if (name === 'categories') {
+            setBookData({ ...bookData, [name]: [value] });
+        } else {
+            setBookData({ ...bookData, [name]: value });
+        }
     };
 
     const handleSubmit = (event) => {
@@ -35,7 +64,9 @@ export default function AddBookForm() {
                 console.log("Book added:", data);
                 setBookData({
                     author: "",
-                    category: null,
+                    categories: {
+                        name: ""
+                    },
                     description: "",
                     image: "",
                     title: "",
@@ -75,6 +106,21 @@ export default function AddBookForm() {
                                value={bookData.author}
                                onChange={handleChange}
                         />
+                    </div>
+                    <div>
+                        <label className="my-3" htmlFor="category">Жанр</label>
+                        <select
+                            value={bookData.categories.name} // Set the selected category's name
+                            onChange={handleChange}
+                            className="form-control"
+                            name="categories" // Set the name to "categories" for the handleChange function
+                        >
+                            {availableCategories.map((category, index) => (
+                                <option key={index} value={category.name}>
+                                    {category.name}
+                                </option>
+                            ))}
+                        </select>
                     </div>
                     <div>
                         <label className="my-3" htmlFor="year">Год</label>

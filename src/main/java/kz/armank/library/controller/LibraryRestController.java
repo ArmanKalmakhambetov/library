@@ -44,7 +44,28 @@ public class LibraryRestController {
     // Добавить новую книгу
     @PostMapping
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-//        book.setCategories(categoryService.findSetCategories(book.getCategories()));
+        List<Category> actualCategories = new ArrayList<>();
+
+        for (Category category : book.getCategories()) {
+            // Попробуйте найти существующую категорию по имени
+            Category existingCategory = categoryService.getCategoryByCategoryName(category.getName());
+
+            if (existingCategory != null) {
+                // Если категория существует, добавьте ее в список фактических категорий
+                actualCategories.add(existingCategory);
+            } else {
+                // Если категория не существует, создайте новую и добавьте ее в список фактических категорий
+                Category newCategory = new Category();
+                newCategory.setName(category.getName());
+                // Другие операции с новой категорией, если необходимо
+                categoryService.createCategory(newCategory);
+                actualCategories.add(newCategory);
+            }
+        }
+
+        // Установите список фактических категорий для книги и сохраните ее
+        book.setCategories(actualCategories);
+
 
         return new ResponseEntity<>(bookService.createBook(book), HttpStatus.OK);
     }
@@ -54,6 +75,28 @@ public class LibraryRestController {
     public ResponseEntity<Book> updateBook(@PathVariable Long id, @RequestBody Book updatedBook) {
 
         updatedBook.setId(id);
+
+        List<Category> actualCategories = new ArrayList<>();
+
+        for (Category category : updatedBook.getCategories()) {
+            // Попробуйте найти существующую категорию по имени
+            Category existingCategory = categoryService.getCategoryByCategoryName(category.getName());
+
+            if (existingCategory != null) {
+                // Если категория существует, добавьте ее в список фактических категорий
+                actualCategories.add(existingCategory);
+            } else {
+                // Если категория не существует, создайте новую и добавьте ее в список фактических категорий
+                Category newCategory = new Category();
+                newCategory.setName(category.getName());
+                // Другие операции с новой категорией, если необходимо
+                categoryService.createCategory(newCategory);
+                actualCategories.add(newCategory);
+            }
+        }
+
+        // Установите список фактических категорий для книги и сохраните ее
+        updatedBook.setCategories(actualCategories);
 
         return new ResponseEntity<>(bookService.updateBook(updatedBook), HttpStatus.OK);
     }

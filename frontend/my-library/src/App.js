@@ -1,9 +1,10 @@
-import { BrowserRouter, Routes, Route, Link, Outlet } from "react-router-dom";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 import Home from "./components/Home";
 import Layout from "./components/Layout";
 import AllBooks from "./components/AllBooks";
 import AddBookForm from "./components/AddBookForm";
 import ThisBook from "./components/ThisBook";
+
 export default function App() {
   return (
       <BrowserRouter>

@@ -1,6 +1,6 @@
 import logo from '../book_86345.svg'
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import {Link, Outlet} from "react-router-dom";
 import '../App.css'
 
 export default function Layout() {
