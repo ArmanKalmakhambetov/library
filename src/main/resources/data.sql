@@ -1,8 +1,15 @@
 -- Создание таблицы 'book'
-CREATE TABLE IF NOT EXISTS book (
+CREATE TABLE IF NOT EXISTS books (
                                     id INT AUTO_INCREMENT PRIMARY KEY,
                                     title VARCHAR(255) NOT NULL,
-                                    author VARCHAR(255)
+                                    author VARCHAR(255),
+                                    year INT,
+                                    page_volume INT,
+                                    rating INT,
+                                    review VARCHAR(800),
+                                    description VARCHAR(800),
+                                    image VARCHAR(800)
+
 );
 
 -- Создание таблицы 'category'
@@ -16,7 +23,7 @@ CREATE TABLE IF NOT EXISTS category_of_books (
                                                  id INT AUTO_INCREMENT PRIMARY KEY,
                                                  book_id INT,
                                                  category_id INT,
-                                                 FOREIGN KEY (book_id) REFERENCES book(id),
+                                                 FOREIGN KEY (book_id) REFERENCES books(id),
                                                  FOREIGN KEY (category_id) REFERENCES category(id)
 );
 
