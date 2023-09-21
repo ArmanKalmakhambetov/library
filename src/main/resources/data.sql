@@ -1,4 +1,10 @@
-
+CREATE TABLE IF NOT EXISTS category_of_books (
+                                                 id INT AUTO_INCREMENT PRIMARY KEY,
+                                                 book_id INT,
+                                                 category_id INT,
+                                                 FOREIGN KEY (book_id) REFERENCES book(id),
+                                                 FOREIGN KEY (category_id) REFERENCES category(id)
+);
 -- Вставляем тестовые категории
 INSERT INTO category (name) VALUES
                                 ('Фантастика'),
