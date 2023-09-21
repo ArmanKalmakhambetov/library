@@ -48,11 +48,7 @@ export default function Layout() {
                 </div>
             </nav>
             <Outlet />
-            <footer>
-                <div className="container-fluid d-flex justify-content-center">
-                    <h5>Конец страницы</h5>
-                </div>
-            </footer>
+
         </div>
     );
 }

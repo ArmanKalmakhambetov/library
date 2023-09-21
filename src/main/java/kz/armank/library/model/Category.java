@@ -26,7 +26,7 @@ public class Category {
 
     @ManyToMany(mappedBy = "categories")
     @JsonIgnore
-    private List<Book> books = new ArrayList<>();
+    private Set<Book> books = new HashSet<>();
 
     public Category(String name) {
         this.name = name;
@@ -50,8 +50,11 @@ public class Category {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, books);
+        int result = 17;
+        result = 31 * result + name.hashCode();
+        return result;
     }
+
 
     @Override
     public String toString() {
