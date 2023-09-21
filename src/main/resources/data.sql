@@ -14,6 +14,11 @@ CREATE TABLE books (
                           description VARCHAR(800),
                           image VARCHAR(800)
 );
+CREATE TABLE category_of_books (
+                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        book_id INT,
+                        category_id INT
+);
 
 
 -- Вставляем тестовые категории
