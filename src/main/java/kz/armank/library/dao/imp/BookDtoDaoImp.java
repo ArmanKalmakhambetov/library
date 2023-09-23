@@ -16,14 +16,15 @@ public class BookDtoDaoImp implements BookDtoDao {
 
     @Override
     public Optional<BookDto> getBookDto() {
-        BookDto bookDto = entityManager.createQuery(
-"""
-            select new kz.armank.library.dto.BookDto
-            (
-            sum (b.pageVolume),
-            count (b)
-            ) from Book as b
-        """, BookDto.class).getSingleResult();
-         return Optional.of(bookDto);
+//        BookDto bookDto = entityManager.createQuery(
+//"""
+//            select new kz.armank.library.dto.BookDto
+//            (
+//            sum (b.pageVolume),
+//            count (b)
+//            ) from Book as b
+//        """, BookDto.class).getSingleResult();
+//         return Optional.of(bookDto);
+        return Optional.of(new BookDto(100L, 100L));
     }
 }
