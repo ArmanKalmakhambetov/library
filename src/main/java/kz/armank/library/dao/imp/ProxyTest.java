@@ -16,6 +16,7 @@ public class ProxyTest {
     private static List<Book> books = new ArrayList<>();
 
     public ProxyTest() {
+
     }
 
 
