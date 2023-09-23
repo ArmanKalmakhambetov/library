@@ -1,11 +1,11 @@
 package kz.armank.library.dao.imp;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import kz.armank.library.dao.abstracts.BookDao;
 import kz.armank.library.model.Book;
 import kz.armank.library.model.Category;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,10 +13,15 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
+@RequiredArgsConstructor
 public class BookDaoImp implements BookDao {
 
     @PersistenceContext
     private EntityManager entityManager;
+
+    private final ProxyTest proxyTest;
+
+
 
     @Override
     @Transactional
@@ -27,7 +32,14 @@ public class BookDaoImp implements BookDao {
     @Override
     @Query(name = "Books.findAllBooksWithCategories", value = "SELECT b FROM Book b LEFT JOIN FETCH b.categories")
     public List<Book> getAllBooks() {
-        return entityManager.createQuery("from Book").getResultList();
+
+        if (!proxyTest.getBooks().isEmpty()) {
+            return proxyTest.getBooks();
+        }
+
+        proxyTest.add(entityManager.createQuery("from Book").getResultList());
+
+        return proxyTest.getBooks();
     }
 
     @Override
