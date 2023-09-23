@@ -2,6 +2,7 @@ package kz.armank.library.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import kz.armank.library.dao.imp.ProxyTest;
 import kz.armank.library.dto.BookDto;
 import kz.armank.library.dto.CategoryDto;
 import kz.armank.library.model.Book;
@@ -10,6 +11,7 @@ import kz.armank.library.service.abstracts.BookDtoService;
 import kz.armank.library.service.abstracts.BookService;
 import kz.armank.library.service.abstracts.CategoryDtoService;
 import kz.armank.library.service.abstracts.CategoryService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +25,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/books")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://library-front-jade.vercel.app/")
 @Api(value = "Книги", description = "Операции с книгами")
 public class LibraryRestController {
 
