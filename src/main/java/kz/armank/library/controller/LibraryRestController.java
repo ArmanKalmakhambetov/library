@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/books")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000/, https://library-front-jade.vercel.app/")
 @Api(value = "Книги", description = "Операции с книгами")
 public class LibraryRestController {
 
