@@ -18,11 +18,7 @@ public class BookDaoImp implements BookDao {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    private final ProxyTest proxyTest;
-
-
-
+    
     @Override
     @Transactional
     public Book createBook(Book book) {
@@ -33,13 +29,7 @@ public class BookDaoImp implements BookDao {
     @Query(name = "Books.findAllBooksWithCategories", value = "SELECT b FROM Book b LEFT JOIN FETCH b.categories")
     public List<Book> getAllBooks() {
 
-        if (!proxyTest.getBooks().isEmpty()) {
-            return proxyTest.getBooks();
-        }
-
-        proxyTest.add(entityManager.createQuery("from Book").getResultList());
-
-        return proxyTest.getBooks();
+        return entityManager.createQuery("from Book").setHint("org.hibernate.cacheable", true).getResultList();
     }
 
     @Override
