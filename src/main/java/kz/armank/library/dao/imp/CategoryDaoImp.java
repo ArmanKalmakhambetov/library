@@ -22,6 +22,7 @@ public class CategoryDaoImp implements CategoryDao {
         Category findCategory = entityManager
                 .createQuery("from Category category where name = :name", Category.class)
                 .setParameter("name", name)
+                .setHint("org.hibernate.cacheable", true)
                 .getSingleResult();
         Hibernate.initialize(findCategory.getBooks());
 
@@ -35,7 +36,9 @@ public class CategoryDaoImp implements CategoryDao {
 
     @Override
     public List<Category> getAllCategories() {
-        return entityManager.createQuery("from Category ", Category.class).getResultList();
+        return entityManager.createQuery("from Category ", Category.class)
+                .setHint("org.hibernate.cacheable", true)
+                .getResultList();
     }
 
     @Override
