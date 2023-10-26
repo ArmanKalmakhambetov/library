@@ -21,15 +21,19 @@
 ## Установка и настройка
 
 1. **Клонирование репозитория**:
+
 git clone https://github.com/ArmanKalmakhambetov/library.git
 
-2. **Настройка базы данных**:
+3. **Настройка базы данных**:
+   
 - Создайте базу данных MySQL и настройте доступ к ней в файле `src/main/resources/application.properties`.
 
 3. **Сборка проекта**:
+   
 mvn clean install
 
-4. **Запуск приложения**:
+5. **Запуск приложения**:
+
 java -jar target/library.jar
 
 ## Документация API
