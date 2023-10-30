@@ -29,7 +29,9 @@ public class BookDaoImp implements BookDao {
     @Query(name = "Books.findAllBooksWithCategories", value = "SELECT b FROM Book b LEFT JOIN FETCH b.categories")
     public List<Book> getAllBooks() {
 
-        return entityManager.createQuery("from Book").setHint("org.hibernate.cacheable", true).getResultList();
+        return entityManager.createQuery("from Book")
+                .setHint("org.hibernate.cacheable", true)
+                .getResultList();
     }
 
     @Override
